@@ -5,29 +5,12 @@
 {% block body %}
 <div class="container mt-5">
     <div class="card shadow-sm p-4">
-        <h2 class="text-center mb-4">Train CNN Model</h2>
-
-        {# Success or failure alerts #}
-        {% if status == "success" %}
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                Model trained successfully!
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% elif status == "error" %}
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                An error occurred during training. Please check logs.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endif %}
+        <h3 class="text-center mb-4">Train the model with customized setup</h3>
 
 
         {% if scores %}
             <div class="mt-4">
-                <h4 class="text-success text-center">Current Performance Metrics</h4>
+                <h5 class="text-success text-center">Current model's performance metrics</h5>
                 <div class="row justify-content-center">
                     <div class="col-md-6">
                         <ul class="list-group">
@@ -48,7 +31,27 @@
                 </div>
             </div>
             {% endif %}
+        
+<br><br>
 
+        <h4 class="text-center mb-4">Set the parametrs and train the model</h4>
+
+        {# Success or failure alerts #}
+        {% if status == "success" %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Model trained successfully!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% elif status == "error" %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                An error occurred during training. Please check logs.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
 
         <form method="POST" action="/train">
             <div class="form-group">
@@ -61,12 +64,12 @@
 
             <div class="form-group">
                 <label for="BATCH_SIZE">Batch Size</label>
-                <input type="number" name="BATCH_SIZE" class="form-control" value="32" required>
+                <input type="number" name="BATCH_SIZE" class="form-control" value="16" required>
             </div>
 
             <div class="form-group">
                 <label for="EPOCHS">Epochs</label>
-                <input type="number" name="EPOCHS" class="form-control" value="10" required>
+                <input type="number" name="EPOCHS" class="form-control" value="3" required>
             </div>
 
             <div class="form-group">

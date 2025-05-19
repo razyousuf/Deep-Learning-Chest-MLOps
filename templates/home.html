@@ -7,13 +7,15 @@
     <div class="form-row flex-column">
 
 <section class="iupload">
-  <h3 class="text-center py-4">Chest CT Scan Image Classification</h3>
+  <h4 class="text-center py-4">Prediction Endpoint</h4>
   <div class="row">
     <!-- Left: Image Upload -->
     <div class="col-md-6">
       <div class="image-part">
-        <video autoplay id="video" class="w-30" poster="https://img.freepik.com/free-vector/group-young-people-posing-photo_52683-18824.jpg"></video>
-        <img src="" id="photo" style="display: none;" />
+       <video autoplay id="video" class="w-30" poster="https://img.freepik.com/free-vector/group-young-people-posing-photo_52683-18824.jpg"></video>
+        <!-- Actual prediction image after upload -->
+        <img src="" id="photo" class="img-thumbnail mt-2" style="display: none; max-width: 500px; height: auto;" />
+
         <canvas style="display: none;" id="canvas"></canvas>
       </div>
       <div class="btn-part mt-3">
@@ -29,8 +31,8 @@
     </div>
 
     <!-- Right: Prediction Results -->
-    <div class="col-md-6 right-part">
-      <h5 class="mb-2 text-center">Prediction Result</h5>
+    <div class="col-md-5 right-part">
+      <h5 class="mb-2 text-center">Prediction Result:</h5>
       <div class="row">
         <div class="res-part2 col-md-5"></div>
         <div class="res-part col-md-5">
@@ -79,8 +81,8 @@ function sendRequest(base64Data) {
 
         let alertType = prediction === "Healthy" ? "success" : "danger";
         let message = prediction === "Healthy"
-            ? "Diagnosis: Image is healthy."
-            : `Diagnosis: ${prediction} has been detected!`;
+            ? "Image is healthy."
+            : `${prediction} has been detected!`;
 
         $(".jsonRes").html(`
             <div class="alert alert-${alertType}" role="alert">

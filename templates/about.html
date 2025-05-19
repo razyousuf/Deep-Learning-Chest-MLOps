@@ -5,9 +5,55 @@ About
 {% endblock title %}
 
 {% block body %}
-<div class="container">
-    <h2 class="navbar-brand-text">About This Application</h2>
-    <p class="navbar-brand-text">This application predicts the Coccidiosis disease from Chest CT-Scan images using CNN VGG16 model. <br><br>Developed by <b>Raz Yousufi</b></p>
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h2 class="text-center mb-4">Brief Description</h2>
+
+        <h4 class="mt-4">📌 About This Application</h4>
+        <p>This web-based tool classifies chest CT scan images as either <strong>Healthy</strong> or showing signs of <strong>Coccidiosis</strong>. It uses deep learning techniques to assist in fast and reliable diagnosis.</p>
+
+        <h4 class="mt-4">🧪 How It Works</h4>
+        <ul>
+            <li><strong>Image Upload:</strong> Users can upload a CT image for diagnosis.</li>
+            <li><strong>Prediction:</strong> A trained CNN model based on <code>VGG16</code> processes the image.</li>
+            <li><strong>Result:</strong> The model outputs whether the image indicates <span class="text-success font-weight-bold">Healthy</span> or <span class="text-danger font-weight-bold">Coccidiosis</span>.</li>
+        </ul>
+
+        <h4 class="mt-4">🔬 Model Architecture</h4>
+        <ul>
+            <li><strong>Base:</strong> Transfer learning with <code>VGG16</code>, pretrained on ImageNet.</li>
+            <li><strong>Customization:</strong> Additional fully connected layers fine-tuned for binary classification.</li>
+            <li><strong>Efficiency:</strong> Optimized for fast inference and minimal overfitting.</li>
+        </ul>
+
+        <h4 class="mt-4">🛠️ Tech Stack</h4>
+        <ul>
+            <li><strong>Frontend:</strong> Jinja2, HTML5, Bootstrap 4</li>
+            <li><strong>Backend:</strong> Flask (Python)</li>
+            <li><strong>Model:</strong> Keras with TensorFlow backend</li>
+            <li><strong>Pipeline:</strong> Modular MLOps with endpoints for training and prediction</li>
+        </ul>
+
+        <h4 class="mt-4">📊 Training Metrics</h4>
+        <p>Once training is completed, the app automatically stores and displays evaluation metrics:</p>
+        <ul>
+            <li><code>Accuracy</code> and <code>Loss</code> are saved to <code>scores.json</code></li>
+            <li>Displayed on the training results page for transparency</li>
+        </ul>
+
+        <h4 class="mt-4">🧩 Model Training Endpoint</h4>
+        <p>
+            In addition to prediction, this app includes a dedicated training interface. Users can customize training parameters like:
+        </p>
+        <ul>
+            <li><strong>Epochs</strong>, <strong>Batch Size</strong>, <strong>Learning Rate</strong></li>
+            <li><strong>Data Augmentation:</strong> Toggle on/off</li>
+        </ul>
+        <p>The model is trained dynamically and saved with updated metrics.</p>
+
+        <h4 class="mt-4">👨‍💻 Developer</h4>
+        <p>Created by <strong>Raz Yousufi</strong>, this application aims to bring accessible, AI-powered diagnostics to healthcare workflows using deep learning and intuitive web interfaces.</p>
+    </div>
 </div>
 {% endblock body %}
    <!-- <p>This web application is designed to predict the customers probability of churn. It has been designed by Raz, a data science graduate student that loves to develop ML models, deploy them using frameworks such as Flask and FastAPI, and share with others for free.</p>
