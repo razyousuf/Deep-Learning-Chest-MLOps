@@ -52,3 +52,16 @@ git push origin main
 1. dvc init
 2. dvc repro
 3. dvc dag
+
+## Jenkins Setup
+
+1. Create EC2-1 machine for Jenkins (Ubuntu 22, RAM >= 4GB, Disk >= 32GB) + set Elastic IP + Update/upgrade + AWS access key configuration
+2. Create IAM user (Add AdministratorAccess permission)
+3. Create ECR Repository for the App
+4. Install Jenkins and Docker on EC2-1
+5. Install SSH Agent plugin on Jenkins
+6. Setup the Credincials (Here, 5 Credintials as are included in the Jenkinsfile)
+7. Create the Pipeline in Jenkins and link it to your Github repo (plus the Jenkinsfile path, e.g., .jenkins/Jenkinsfile)
+8. Create EC2-2 machine for the App (Ubuntu 22, t2.large, RAM >= 8GB, Disk >= 32 GB ) + Update/upgrade + AWS access key configuration
+9. Install Docker + setup
+10. Add required Secrets in Github
