@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - CT Scan Image Classification{% endblock %}
+
+{% block body %}
+<div class = "formContainer">
+    <div class="form-row flex-column">
+
+<section class="iupload">
+  <h3 class="text-center py-4">Chest CT Scan Image Classification</h3>
+  <div class="row">
+    <!-- Left: Image Upload -->
+    <div class="col-md-6">
+      <div class="image-part">
+        <video autoplay id="video" class="w-30" poster="https://img.freepik.com/free-vector/group-young-people-posing-photo_52683-18824.jpg"></video>
+        <img src="" id="photo" style="display: none;" />
+        <canvas style="display: none;" id="canvas"></canvas>
+      </div>
+      <div class="btn-part mt-3">
+        <form id="upload-data">
+          <div class="input-group row">
+            <button type="button" class="btn btn-primary col-md-5 ml-3 mr-4" id="uload">Upload</button>
+            <button type="button" class="btn btn-success col-md-5" id="send">Predict</button>
+          </div>
+          <input type="hidden" id="url" value="{{ url_for('predictRoute') }}">
+          <input name="upload" type="file" id="fileinput" style="position:absolute;top:-500px;" />
+        </form>
+      </div>
+    </div>
+
+    <!-- Right: Prediction Results -->
+    <div class="col-md-6 right-part">
+      <h5 class="mb-2 text-center">Prediction Result</h5>
+      <div class="row">
+        <div class="res-part2 col-md-5"></div>
+        <div class="res-part col-md-5">
+          <div class="jsonRes"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+ </div>
+</div>
+
+<img class="logo" src="" />
+
+<!-- Loading Spinner -->
+<div id="loading" style="display:none;">
+  <div class="loader"></div>
+</div>
+
+<!-- JS Dependencies -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- Image Upload + Predict Script -->
+<script>
+let base_data = "";
+
+function sendRequest(base64Data) {
+  const url = $("#url").val();
+  if (!base64Data) {
+    alert("Please upload an image first.");
+    return;
+  }
+
+  $("#loading").show();
+
+  $.ajax({
+    url: url,
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({ image: base64Data }),
+    success: function (res) {
+        $("#loading").hide();
+
+        let prediction = res[0]?.image;
+
+        let alertType = prediction === "Healthy" ? "success" : "danger";
+        let message = prediction === "Healthy"
+            ? "Diagnosis: Image is healthy."
+            : `Diagnosis: ${prediction} has been detected!`;
+
+        $(".jsonRes").html(`
+            <div class="alert alert-${alertType}" role="alert">
+            ${message}
+            </div>
+        `);
+        },
+
+    error: function (err) {
+      $("#loading").hide();
+      $(".jsonRes").html("<p class='text-danger'>Error: " + err.responseText + "</p>");
+    }
+  });
+}
+
+$(document).ready(function () {
+  $("#loading").hide();
+
+  $('#uload').click(function () {
+    $('#fileinput').click();
+  });
+
+  $('#send').click(function () {
+    sendRequest(base_data);
+  });
+
+  $("#fileinput").change(function () {
+    const file = this.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const url = e.target.result;
+
+      const img = new Image();
+      img.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = this.width;
+        canvas.height = this.height;
+
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(this, 0, 0);
+
+        base_data = canvas.toDataURL("image/jpeg").replace(/^data:image\/(png|jpeg);base64,/, "");
+
+        $("#photo").attr("src", url).show();
+        $("#video").hide();
+      };
+      img.src = url;
+    };
+    reader.readAsDataURL(file);
+  });
+});
+</script>
+{% endblock %}

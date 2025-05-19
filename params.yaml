@@ -1,8 +1,2 @@
-IS_AUGMENTATION: True
-BATCH_SIZE: 16
-EPOCHS: 1 # In production, this should be 1000 or more
-LEARNING_RATE: 0.05
-IMAGE_SIZE: [224, 224, 3] # shape for VGG16
-INCLUDE_TOP: false # I don't want to include the dense layers, just the convolutional layer
-CLASSES: 2 # 2 classes: Normal and Adenocarcinoma
-WEIGHTS: "imagenet"
+{IS_AUGMENTATION: true, BATCH_SIZE: 16, EPOCHS: 5, LEARNING_RATE: 0.001, IMAGE_SIZE: [
+224, 224, 3], INCLUDE_TOP: false, WEIGHTS: "imagenet", CLASSES: 2}

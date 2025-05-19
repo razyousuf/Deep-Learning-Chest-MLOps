@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Train Model{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="card shadow-sm p-4">
+        <h2 class="text-center mb-4">Train CNN Model</h2>
+
+        {# Success or failure alerts #}
+        {% if status == "success" %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Model trained successfully!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% elif status == "error" %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                An error occurred during training. Please check logs.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+
+
+        {% if scores %}
+            <div class="mt-4">
+                <h4 class="text-success text-center">Current Performance Metrics</h4>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Accuracy
+                                <span class="badge badge-success badge-pill">
+                                    {{ (scores.accuracy * 100) | round(2) }}%
+                                </span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Loss
+                                <span class="badge badge-danger badge-pill">
+                                    {{ scores.loss | round(4) }}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+
+        <form method="POST" action="/train">
+            <div class="form-group">
+                <label for="IS_AUGMENTATION">Enable Augmentation</label>
+                <select name="IS_AUGMENTATION" class="form-control" required>
+                    <option value="True">True</option>
+                    <option value="False">False</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="BATCH_SIZE">Batch Size</label>
+                <input type="number" name="BATCH_SIZE" class="form-control" value="32" required>
+            </div>
+
+            <div class="form-group">
+                <label for="EPOCHS">Epochs</label>
+                <input type="number" name="EPOCHS" class="form-control" value="10" required>
+            </div>
+
+            <div class="form-group">
+                <label for="LEARNING_RATE">Learning Rate</label>
+                <input type="text" name="LEARNING_RATE" class="form-control" value="0.001" required>
+            </div>
+
+           
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Train Model</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

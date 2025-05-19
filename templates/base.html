@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="static/mystyle.css">
+    <script src="{{ url_for('static', filename='js/test.js') }}"></script>
+    <title> {% block title %} {% endblock title %} Image Classification</title>
+  </head>
+
+
+<body>  
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand-text" href="/">Home</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('trainRoute') }}">
+                  <i class="fas fa-brain mr-1"></i> Training
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('predictRoute') }}">
+                  <i class="fas fa-microscope mr-1"></i> Prediction
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('about') }}">
+                  <i class="fas fa-info-circle mr-1"></i> About
+                </a>
+              </li>
+            </ul>
+          
+        </div>
+
+        <a class="nav-git-text" href="https://github.com/razyousuf/Deep-Learning-Chest-MLOps" target="blank">Github</a>
+    
+
+        
+    </nav>
+
+    <h1 class="heading"> Chest CT Scan Image Classification using Deep Learning</h1>
+
+    
+
+    {% block body %}
+        <section class="container my-5">
+  <div class="row text-center">
+    <!-- Training -->
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <i class="fas fa-brain fa-3x text-primary mb-3"></i>
+          <h5 class="card-title">Training</h5>
+          <p class="card-text">Start model training on chest CT scan images.</p>
+          <a href="{{ url_for('trainRoute') }}" class="btn btn-outline-primary">Go to Training</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Prediction -->
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <i class="fas fa-microscope fa-3x text-success mb-3"></i>
+          <h5 class="card-title">Prediction</h5>
+          <p class="card-text">Upload a scan to detect abnormalities using the trained model.</p>
+          <a href="{{ url_for('predictRoute') }}" class="btn btn-outline-success">Go to Prediction</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- About -->
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <i class="fas fa-info-circle fa-3x text-warning mb-3"></i>
+          <h5 class="card-title">About</h5>
+          <p class="card-text">Learn more about the project and its motivation.</p>
+          <a href="{{ url_for('about') }}" class="btn btn-outline-warning">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    {% endblock body %}
+
+
+      <!-- Footer Section -->
+      <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+          <p class="mb-1 font-weight-bold">Empowering medical practionars to detect abnormalities in their CT Scan images</p>
+          <ul class="list-inline mb-3">
+            <li class="list-inline-item"><a href="#" class="text-warning">Privacy Policy</a></li>
+            <li class="list-inline-item">|</li>
+            <li class="list-inline-item"><a href="#" class="text-warning">Terms of Service</a></li>
+            <li class="list-inline-item">|</li>
+            <li class="list-inline-item"><a href="mailto:razyousufi350@gmail.com" class="text-warning">Contact Us</a></li>
+          </ul>
+          <p class="mb-0">&copy; <span id="currentYear"></span> Customer Churn Predictor | Designed with ❤️ by Raz</p>
+        </div>
+      </footer>
+      <script>
+          // Get the current year and display it in the span
+          document.getElementById('currentYear').textContent = new Date().getFullYear();
+      </script>  
+
+
+</body>
+
+
+</html> 
