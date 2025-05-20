@@ -70,7 +70,7 @@ In your setup (image classifier, training via EC2 and Jenkins, Docker + ECR), DV
   dvc repro # Re-run pipeline stages as needed
   dvc dag   # Visualize pipeline dependencies graphically
 ```
-## Jenkins Setup
+## AWS and Jenkins Setup
 
 1. Create EC2-1 machine for Jenkins (Ubuntu 22, RAM >= 4GB, Disk >= 32GB) + set Elastic IP + Update/upgrade + AWS access key configuration
 2. Create IAM user (Add AdministratorAccess permission)
