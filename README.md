@@ -4,11 +4,15 @@
 
 1. Data Ingestion   # Download, extract, and prepare raw data
 2. Create the base model   # Download the VGG16 with Conv. layers only, add the customized dense layers to it, and save both models
-3. Train and the base model   # Train the model on processed data
+3. Train the base model   # Train the model on processed data
 4. Evaluate the base model with MLflow  # Log metrics, params, and model using MLflow
 5. Create the prediction pipeline   # Build serving logic for inference (e.g., API/UI integration)
+6. Develop the App
+7. Setup the AWS EC2, ECR, IAM and Jenkins
+8. Setup the GitHub Actions secrets
+9. Trigger the Pipeline
 
-## Workflow for each step
+## Workflow for each step, from step 1 to 5
 
 1. Update the config.yaml. # changeble vars and urls
 2. Update the params.yaml & read it. # Specify hyperparameters and tunable settings
@@ -65,3 +69,4 @@ git push origin main
 8. Create EC2-2 machine for the App (Ubuntu 22, t2.large, RAM >= 8GB, Disk >= 32 GB ) + Update/upgrade + AWS access key configuration
 9. Install Docker + setup
 10. Add required Secrets in Github
+11. Trigger the Pipeline
