@@ -51,12 +51,20 @@ git commit -m "Updated"
 git push origin main
 ```
 
+### Why DVC (Data Version Control)?
+In your setup (image classifier, training via EC2 and Jenkins, Docker + ECR), DVC helps by:
+🛠️ Structuring your ML workflow into stages (e.g., data prep → training → evaluation)
+📦 Storing large files (datasets, models) outside Git (in S3, GDrive, etc.) while still tracking versions
+📈 Making experiments reproducible — anyone can re-run your full pipeline with dvc repro
+🔁 Helping Jenkins or other automation tools track whether files or stages changed
+🔍 Tracking hyperparameters and model performance — using params.yaml and metrics.yaml for transparent experimentation and tuning
+
 ### DVC cmd
-
-1. dvc init
-2. dvc repro
-3. dvc dag
-
+```bash
+  dvc init  # Initialize DVC in your repo
+  dvc repro # Re-run pipeline stages as needed
+  dvc dag   # Visualize pipeline dependencies graphically
+```
 ## Jenkins Setup
 
 1. Create EC2-1 machine for Jenkins (Ubuntu 22, RAM >= 4GB, Disk >= 32GB) + set Elastic IP + Update/upgrade + AWS access key configuration
